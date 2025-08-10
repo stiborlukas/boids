@@ -76,6 +76,24 @@ namespace boids
 
                 SimulationCanvas.Children.Add(triangle);
 
+                // vykresli trail
+                int index = 0;
+                foreach (var point in boid.Trail)
+                {
+                    double opacity = (double)index / boid.Trail.Count;
+                    Ellipse dot = new Ellipse
+                    {
+                        Width = 3,
+                        Height = 3,
+                        Fill = new SolidColorBrush(Color.FromArgb((byte)(opacity * 255), 0, 0, 255)),
+                        StrokeThickness = 0
+                    };
+                    Canvas.SetLeft(dot, point.X - 1.5);
+                    Canvas.SetTop(dot, point.Y - 1.5);
+                    SimulationCanvas.Children.Add(dot);
+                    index++;
+                }
+
             }
         }
 
