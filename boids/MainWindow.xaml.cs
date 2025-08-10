@@ -18,7 +18,7 @@ namespace boids
         public MainWindow()
         {
             InitializeComponent();
-            // timer pro imulaci Update()
+            // timer pro simulaci Update()
             timer = new DispatcherTimer();
             
             // ~60 FPS
