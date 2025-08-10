@@ -53,17 +53,65 @@ namespace boids
 
         private Vector CalculateSeparation(Boid[] boids)
         {
-            
+            Vector steer = new Vector(0, 0);
+            int count = 0;
+            foreach (var other in boids)
+            {
+                double distance = Vector.Subtract(Position, other.Position).Length;
+                if (distance > 0 && distance < PerceptionRadius / 2)
+                {
+                    Vector diff = Vector.Subtract(Position, other.Position);
+                    diff /= distance;
+                    steer += diff;
+                    count++;
+                }
+            }
+            if (count > 0)
+            {
+                steer /= count;
+                steer = steer / steer.Length * MaxSpeed;
+            }
+            return steer;
         }
 
         private Vector CalculateAlignment(Boid[] boids)
         {
-            
+            Vector steer = new Vector(0, 0);
+            int count = 0;
+            foreach (var other in boids)
+            {
+                if (Vector.Subtract(Position, other.Position).Length < PerceptionRadius)
+                {
+                    steer += other.Velocity;
+                    count++;
+                }
+            }
+            if (count > 0)
+            {
+                steer /= count;
+                steer = steer / steer.Length * MaxSpeed;
+            }
+            return steer;
         }
 
         private Vector CalculateCohesion(Boid[] boids)
         {
-            
+            Vector center = new Vector(0, 0);
+            int count = 0;
+            foreach (var other in boids)
+            {
+                if (Vector.Subtract(Position, other.Position).Length < PerceptionRadius)
+                {
+                    center += other.Position;
+                    count++;
+                }
+            }
+            if (count > 0)
+            {
+                center /= count;
+                return (center - Position) / 100;
+            }
+            return new Vector(0, 0);
         }
     }
 }
