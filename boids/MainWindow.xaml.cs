@@ -47,13 +47,14 @@ namespace boids
         private void RenderBoids()
         {
             SimulationCanvas.Children.Clear();
+            Color neonGreen = Color.FromRgb(0, 255, 127);
             foreach (var boid in boids)
             {
                 // tvar boidu
                 Polygon triangle = new Polygon
                 {
-                    Fill = Brushes.Blue,
-                    Stroke = Brushes.Black,
+                    Fill = new SolidColorBrush(neonGreen),
+                    Stroke = new SolidColorBrush(neonGreen),
                     StrokeThickness = 1,
                     Points = new PointCollection
                     {
@@ -83,11 +84,13 @@ namespace boids
                     foreach (var point in boid.Trail)
                     {
                         double opacity = (double)index / boid.Trail.Count;
+                        Color trailColor = Color.FromArgb((byte)(opacity * 255), neonGreen.R, neonGreen.G, neonGreen.B);
+
                         Ellipse dot = new Ellipse
                         {
                             Width = 3,
                             Height = 3,
-                            Fill = new SolidColorBrush(Color.FromArgb((byte)(opacity * 255), 0, 0, 255)),
+                            Fill = new SolidColorBrush(trailColor),
                             StrokeThickness = 0
                         };
                         Canvas.SetLeft(dot, point.X - 1.5);
