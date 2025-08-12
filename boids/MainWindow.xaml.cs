@@ -136,11 +136,17 @@ namespace boids
             SimulationCanvas.Children.Clear();
         }
 
+        // import - jeste nevim jak\
+        // potrebuju ukladat
+        // pozice vsech, rychlosti atd, vsechny 3 sily
+        // csv nebo json nebo lokalni databaze?
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
+        // export - jeste nevim jak
+        // zpracovat ten typ co si vyberu
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
 
