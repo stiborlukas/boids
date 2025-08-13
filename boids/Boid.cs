@@ -8,8 +8,6 @@ namespace boids
     {
         public Vector Position { get; set; }
         public Vector Velocity { get; set; }
-
-        // TODO - nastavitelna max rychlost pomoci slideru
         public double MaxSpeed { get; set; } = 3.0;
         public double PerceptionRadius { get; set; } = 50.0;
 
