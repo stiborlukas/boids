@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -15,14 +17,16 @@ namespace boids
         private DispatcherTimer timer;
         private bool isRunning = false;
 
+        private int frameCount = 0;
+        private DateTime lastFpsUpdate = DateTime.Now;
+
         public MainWindow()
         {
             InitializeComponent();
             // timer pro simulaci Update()
             timer = new DispatcherTimer();
-            
-            // ~60 FPS
-            timer.Interval = TimeSpan.FromMilliseconds(16);
+
+            timer.Interval = TimeSpan.FromMilliseconds(12);
             timer.Tick += Timer_Tick;
         }
 
@@ -37,11 +41,25 @@ namespace boids
 
             foreach (var boid in boids)
             {
+                boid.MaxSpeed = MaxSpeedSlider.Value;
                 boid.Update(boids.ToArray(), separationStrength, alignmentStrength, cohesionStrength, canvasWidth, canvasHeight);
             }
 
             // render boids
             RenderBoids();
+
+            // fps
+            frameCount++;
+            var currentTime = DateTime.Now;
+            var elapsed = (currentTime - lastFpsUpdate).TotalSeconds;
+            if (elapsed >= 1.0)
+            {
+                double fps = frameCount / elapsed;
+                FpsDisplay.Text = $"{fps:F0}";
+                frameCount = 0;
+                lastFpsUpdate = currentTime;
+            }
+            Canvas.SetZIndex(FpsDisplay, 1000);
         }
 
         private void RenderBoids()

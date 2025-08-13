@@ -74,6 +74,13 @@
                 <Rectangle Grid.Row="1" Fill="#00FF7F"/>
             </Grid>
         </Canvas>
+        <TextBlock x:Name="FpsDisplay"
+                   Foreground="Red"
+                   FontWeight="Bold"
+                   FontSize="14"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,10,10"/>
 
         <Border Grid.Column="1"
                 Background="#1A1A1E"
@@ -180,6 +187,25 @@
                            FontWeight="Bold"
                            Margin="0,10,0,10"/>
                 <CheckBox x:Name="TrailCheckBox" Content="SHOW TRAIL" IsChecked="True"/>
+
+
+
+
+                <TextBlock Text="MAX SPEED:" Margin="5,0"/>
+                <Grid Margin="5,5,5,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Slider x:Name="MaxSpeedSlider" Minimum="1" Maximum="7" Value="3" Grid.Column="0" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                    <TextBlock x:Name="MaxSpeedValue"
+                           Text="{Binding ElementName=MaxSpeedSlider, Path=Value, StringFormat=F2}"
+                           Foreground="#00FFFF"
+                           Grid.Column="1"
+                           Width="40"
+                           TextAlignment="Right"/>
+                </Grid>
+
 
             </StackPanel>
         </Border>
