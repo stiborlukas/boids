@@ -1,0 +1,14 @@
+specifikovat problem - povidani
+algoritmicke reseni - popis tri pravidel, jak na ne ten typek prisel atd
+diskuze - jiny modely. boids je jen jeden z mala swarm inteligence
+zakladni datove struk.
+navrh architektury, dekompozice
+UML diagram
+
+popis trid
+popis metod
+
+testovani
+
+Uživatelská dokumentace: co, jak  a kde pustit, nainstalovat a ovládat/interagovat  
+
