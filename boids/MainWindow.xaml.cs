@@ -141,12 +141,11 @@ namespace boids
                 timer.Start();
                 isRunning = true;
             }
-        }
-
-        private void PauseButton_Click(object sender, RoutedEventArgs e)
-        {
-            timer.Stop();
-            isRunning = false;
+            else
+            {
+                timer.Stop();
+                isRunning = false;
+            }
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)

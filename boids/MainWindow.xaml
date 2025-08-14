@@ -101,8 +101,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="StartButton" Content="START" Grid.Column="0" Click="StartButton_Click"/>
-                    <Button x:Name="PauseButton" Content="PAUSE" Grid.Column="1" Click="PauseButton_Click"/>
+                    <Button x:Name="StartButton" Content="START/PAUSE" Grid.Column="0" Click="StartButton_Click" Grid.ColumnSpan="2"/>
                     <Button x:Name="ResetButton" Content="RESET" Grid.Column="2" Click="ResetButton_Click"/>
                 </Grid>
                 <Grid Margin="0,5,0,15">
