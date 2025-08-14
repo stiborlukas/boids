@@ -186,10 +186,7 @@
                            FontWeight="Bold"
                            Margin="0,10,0,10"/>
                 <CheckBox x:Name="TrailCheckBox" Content="SHOW TRAIL" IsChecked="True"/>
-
-
-
-
+                
                 <TextBlock Text="MAX SPEED:" Margin="5,0"/>
                 <Grid Margin="5,5,5,10">
                     <Grid.ColumnDefinitions>
