@@ -154,6 +154,8 @@ namespace boids
             isRunning = false;
             boids.Clear();
             SimulationCanvas.Children.Clear();
+
+            StartButton_Click(StartButton, new RoutedEventArgs());
         }
 
         // import - jeste nevim jak\
