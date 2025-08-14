@@ -1,12 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Text.Json;
+using System.Windows;
 
 namespace boids
 {
-    internal class ImportExport
+    public class SimulationState
     {
+        public List<BoidData> Boids { get; set; }
+        public double SeparationStrength { get; set; }
+        public double AlignmentStrength { get; set; }
+        public double CohesionStrength { get; set; }
+        public double MaxSpeed { get; set; }
+    }
+
+    public class BoidData
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double VelocityX { get; set; }
+        public double VelocityY { get; set; }
+    }
+
+    public static class ImportExport
+    {
+        public static void Export(string path, SimulationState state)
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize(state, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(path, json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Export failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public static SimulationState Import(string path)
+        {
+            try
+            {
+                string json = File.ReadAllText(path);
+                return JsonSerializer.Deserialize<SimulationState>(json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Import failed: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+        }
     }
 }

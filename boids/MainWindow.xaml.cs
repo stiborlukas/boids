@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -158,20 +160,62 @@ namespace boids
             StartButton_Click(StartButton, new RoutedEventArgs());
         }
 
-        // import - jeste nevim jak\
-        // potrebuju ukladat
-        // pozice vsech, rychlosti atd, vsechny 3 sily
-        // csv nebo json nebo lokalni databaze?
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*",
+                Title = "Import"
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                var state = ImportExport.Import(openFileDialog.FileName);
+                if (state != null)
+                {
+                    SeparationSlider.Value = state.SeparationStrength;
+                    AlignmentSlider.Value = state.AlignmentStrength;
+                    CohesionSlider.Value = state.CohesionStrength;
+                    MaxSpeedSlider.Value = state.MaxSpeed;
+                    boids.Clear();
+                    foreach (var bd in state.Boids)
+                    {
+                        var b = new Boid(bd.X, bd.Y);
+                        b.Velocity = new Vector(bd.VelocityX, bd.VelocityY);
+                        b.MaxSpeed = state.MaxSpeed;
+                        boids.Add(b);
+                    }
+                    RenderBoids();
+                }
+            }
         }
 
-        // export - jeste nevim jak
-        // zpracovat ten typ co si vyberu
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "JSON Files (*.json)|*.json|All Files (*.*)|*.*",
+                Title = "Export",
+                DefaultExt = "json",
+                AddExtension = true
+            };
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                SimulationState state = new SimulationState
+                {
+                    SeparationStrength = SeparationSlider.Value,
+                    AlignmentStrength = AlignmentSlider.Value,
+                    CohesionStrength = CohesionSlider.Value,
+                    MaxSpeed = boids.Count > 0 ? boids[0].MaxSpeed : 5.0,
+                    Boids = boids.Select(b => new BoidData
+                    {
+                        X = b.Position.X,
+                        Y = b.Position.Y,
+                        VelocityX = b.Velocity.X,
+                        VelocityY = b.Velocity.Y
+                    }).ToList()
+                };
+                ImportExport.Export(saveFileDialog.FileName, state);
+            }
         }
     }
 }
