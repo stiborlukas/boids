@@ -47,8 +47,11 @@ namespace boids
 
             // render boids
             RenderBoids();
+            CountFPS();   
+        }
 
-            // fps
+        private void CountFPS()
+        {
             frameCount++;
             var currentTime = DateTime.Now;
             var elapsed = (currentTime - lastFpsUpdate).TotalSeconds;
