@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 
 namespace boids
@@ -50,7 +51,6 @@ namespace boids
                 Trail.Dequeue();
         }
 
-
         private Vector CalculateSeparation(Boid[] boids)
         {
             Vector steer = new Vector(0, 0);
@@ -69,7 +69,10 @@ namespace boids
             if (count > 0)
             {
                 steer /= count;
-                steer = steer / steer.Length * MaxSpeed;
+                if (steer.Length > 0)
+                {
+                    steer = steer / steer.Length * MaxSpeed;
+                }
             }
             return steer;
         }
@@ -89,7 +92,10 @@ namespace boids
             if (count > 0)
             {
                 steer /= count;
-                steer = steer / steer.Length * MaxSpeed;
+                if (steer.Length > 0)
+                {
+                    steer = steer / steer.Length * MaxSpeed;
+                }
             }
             return steer;
         }
@@ -113,5 +119,6 @@ namespace boids
             }
             return new Vector(0, 0);
         }
+
     }
 }
