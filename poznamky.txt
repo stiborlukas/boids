@@ -11,8 +11,3 @@ popis metod
 testovani
 
 Uživatelská dokumentace: co, jak  a kde pustit, nainstalovat a ovládat/interagovat  
-
-
-------------------------PROBLEM
-- deleni nulou pri celni srazce
-- je treba predelat vsechny vypocitavani sil
