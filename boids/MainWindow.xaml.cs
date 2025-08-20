@@ -32,6 +32,7 @@ namespace boids
             timer.Tick += Timer_Tick;
         }
 
+        // Aktualizuje boidy a vykresluje scénu
         private void Timer_Tick(object sender, EventArgs e)
         {
             // update boids
@@ -67,6 +68,7 @@ namespace boids
             Canvas.SetZIndex(FpsDisplay, 1000);
         }
 
+        // Vykresluje boidy jako trojúhelníky na Canvas
         private void RenderBoids()
         {
             SimulationCanvas.Children.Clear();

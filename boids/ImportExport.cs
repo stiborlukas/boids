@@ -25,6 +25,7 @@ namespace boids
 
     public static class ImportExport
     {
+        // Serializuje SimulationState do JSON
         public static void Export(string path, SimulationState state)
         {
             try
@@ -38,6 +39,7 @@ namespace boids
             }
         }
 
+        // Deserializuje JSON do SimulationState
         public static SimulationState Import(string path)
         {
             try

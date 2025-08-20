@@ -24,6 +24,7 @@ namespace boids
             Velocity = new Vector(rand.NextDouble() * 2 - 1, rand.NextDouble() * 2 - 1) * MaxSpeed;
         }
 
+        // Kombinuje pravidla a aktualizuje pozici/rychlost
         public void Update(Boid[] boids, double separationStrength, double alignmentStrength, double cohesionStrength, double canvasWidth, double canvasHeight)
         {
             Vector separation = CalculateSeparation(boids);
