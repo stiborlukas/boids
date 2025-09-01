@@ -1,0 +1,26 @@
+{
+  "Boids": [
+    {
+      "X": 100,
+      "Y": 100,
+      "VelocityX": 1,
+      "VelocityY": 1
+    },
+    {
+      "X": 110,
+      "Y": 110,
+      "VelocityX": 1.2,
+      "VelocityY": 0.8
+    },
+    {
+      "X": 90,
+      "Y": 90,
+      "VelocityX": 0.8,
+      "VelocityY": 1.2
+    }
+  ],
+  "SeparationStrength": 0.5,
+  "AlignmentStrength": 1.5,
+  "CohesionStrength": 0.5,
+  "MaxSpeed": 2
+}
