@@ -1,0 +1,64 @@
+@startuml Boids Simulation UML Diagram
+
+' Třída MainWindow
+class MainWindow {
+  +List<Boid> boids
+  +DispatcherTimer timer
+  +bool isRunning
+  +int frameCount
+  +DateTime lastFpsUpdate
+  +MainWindow()
+  -Timer_Tick(sender: object, e: EventArgs)
+  -CountFPS()
+  -RenderBoids()
+  -StartButton_Click(sender: object, e: RoutedEventArgs)
+  -ResetButton_Click(sender: object, e: RoutedEventArgs)
+  -ImportButton_Click(sender: object, e: RoutedEventArgs)
+  -ExportButton_Click(sender: object, e: RoutedEventArgs)
+}
+
+' Třída Boid
+class Boid {
+  +Vector Position
+  +Vector Velocity
+  +double MaxSpeed
+  +double PerceptionRadius
+  +Queue<Vector> Trail
+  +int MaxTrailLength
+  +Boid(x: double, y: double)
+  -Update(boids: Boid[], separationStrength: double, alignmentStrength: double, cohesionStrength: double, canvasWidth: double, canvasHeight: double)
+  -CalculateSeparation(boids: Boid[]): Vector
+  -CalculateAlignment(boids: Boid[]): Vector
+  -CalculateCohesion(boids: Boid[]): Vector
+}
+
+' Třída SimulationState
+class SimulationState {
+  +List<BoidData> Boids
+  +double SeparationStrength
+  +double AlignmentStrength
+  +double CohesionStrength
+  +double MaxSpeed
+}
+
+' Třída BoidData
+class BoidData {
+  +double X
+  +double Y
+  +double VelocityX
+  +double VelocityY
+}
+
+' Třída ImportExport
+class ImportExport {
+  +<<static>> Export(path: string, state: SimulationState)
+  +<<static>> Import(path: string): SimulationState
+}
+
+' Vztahy
+MainWindow o--> Boid
+MainWindow --> ImportExport
+ImportExport --> SimulationState : serializace/deserializace
+SimulationState o--> BoidData
+
+@enduml
